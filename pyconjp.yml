@@ -1,0 +1,5 @@
+---
+- hosts: pyconjp
+  tasks:
+    - debug:
+        msg: "Hello"
