@@ -3,6 +3,7 @@
   set_fact:
     packages:
       - rsync
+      - git
 
 - name: install base packages from apt
   apt:

@@ -51,6 +51,14 @@ server {
 		try_files $uri $uri/ =404;
 	}
 
+        location /2019/ {
+            root /var/www/pyconjp/pycon.jp.2019/;
+        }
+
+        location /2020/ {
+            proxy_pass https://pyconjp.github.io/pycon.jp.2020.teaser/;
+        }
+
 	# pass PHP scripts to FastCGI server
 	#
 	#location ~ \.php$ {

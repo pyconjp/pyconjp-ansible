@@ -2,4 +2,5 @@
 - hosts: pyconjp
   roles:
     - base
-    - nginx
+    - { tags: w2019, role: web-2019 }
+    - { tags: n, role: nginx }
