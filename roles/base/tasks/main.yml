@@ -1,0 +1,11 @@
+---
+- name: base packages
+  set_fact:
+    packages:
+      - rsync
+
+- name: install base packages from apt
+  apt:
+    state: present
+    name: "{{ packages }}"
+    update_cache: yes

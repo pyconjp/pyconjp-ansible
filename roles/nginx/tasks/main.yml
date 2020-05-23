@@ -1,0 +1,26 @@
+---
+- name: install nginx
+  apt:
+    name: nginx-extras
+
+- name: sync etc/nginx directory
+  synchronize:
+    src: etc/nginx/
+    dest: /etc/nginx/
+    recursive: yes
+    delete: yes
+    owner: no
+    group: no
+    perms: no
+
+- name: nginx config test
+  command: sudo /usr/sbin/nginx -t -c /etc/nginx/nginx.conf
+  args:
+    warn: no
+  changed_when: false
+
+- name: nginx started
+  systemd: name=nginx.service state=started
+
+- name: nginx reloaded
+  systemd: name=nginx.service state=reloaded

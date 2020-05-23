@@ -1,5 +1,5 @@
 ---
 - hosts: pyconjp
-  tasks:
-    - debug:
-        msg: "Hello"
+  roles:
+    - base
+    - nginx
