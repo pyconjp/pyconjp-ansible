@@ -51,7 +51,11 @@ server {
 		try_files $uri $uri/ =404;
 	}
 
-        location /2019/ {
+        location /2018 {
+            root /var/www/pyconjp/pycon.jp.2018/;
+        }
+
+        location /2019 {
             root /var/www/pyconjp/pycon.jp.2019/;
         }
 
