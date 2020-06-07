@@ -16,6 +16,11 @@
 # Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
 ##
 
+map $http_accept_language $lang {
+    default en;
+    ~ja ja;
+}
+
 # Default server configuration
 #
 server {
@@ -50,6 +55,13 @@ server {
 		# as directory, then fall back to displaying a 404.
 		try_files $uri $uri/ =404;
 	}
+
+        location ~ ^/2017(/|)$ {
+            return 301 $scheme://$host/2017/$lang;
+        }
+        location /2017/ {
+            root /var/www/pyconjp/pycon.jp.2017/;
+        }
 
         location /2018 {
             root /var/www/pyconjp/pycon.jp.2018/;

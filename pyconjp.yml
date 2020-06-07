@@ -4,4 +4,5 @@
     - base
     - { tags: w2019, role: web-2019 }
     - { tags: w2018, role: web-2018 }
+    - { tags: w2017, role: web-2017 }
     - { tags: n, role: nginx }
