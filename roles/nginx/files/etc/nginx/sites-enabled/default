@@ -56,6 +56,13 @@ server {
 		try_files $uri $uri/ =404;
 	}
 
+        location ~ ^/2016(/|)$ {
+            return 301 $scheme://$host/2016/$lang;
+        }
+        location /2016/ {
+            root /var/www/pyconjp/pycon.jp.2016/;
+        }
+
         location ~ ^/2017(/|)$ {
             return 301 $scheme://$host/2017/$lang;
         }

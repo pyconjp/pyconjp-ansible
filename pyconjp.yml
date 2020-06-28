@@ -5,4 +5,5 @@
     - { tags: w2019, role: web-2019 }
     - { tags: w2018, role: web-2018 }
     - { tags: w2017, role: web-2017 }
+    - { tags: w2016, role: web-2016 }
     - { tags: n, role: nginx }
