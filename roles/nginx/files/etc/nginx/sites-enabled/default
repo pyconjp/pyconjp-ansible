@@ -78,8 +78,16 @@ server {
             root /var/www/pyconjp/pycon.jp.2019/;
         }
 
-        location /2020/ {
-            proxy_pass https://pyconjp.github.io/pycon.jp.2020.teaser/;
+        # location /2020/ {
+        #     proxy_pass https://pyconjp.github.io/pycon.jp.2020.teaser/;
+        # }
+
+        location ~ ^/(2020|_nuxt)/ {
+            resolver 169.254.169.253 valid=5s;
+            set $to master.d2pny5p3024uhy.amplifyapp.com;
+            proxy_pass https://$to/;
+            proxy_ssl_server_name   on;
+            proxy_ssl_name          $to;
         }
 
 	# pass PHP scripts to FastCGI server
