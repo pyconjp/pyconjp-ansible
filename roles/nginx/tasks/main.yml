@@ -1,7 +1,7 @@
 ---
-- name: install nginx
-  apt:
-    name: nginx-extras
+# - name: install nginx
+#   apt:
+#     name: nginx-extras
 
 - name: sync etc/nginx directory
   synchronize:
