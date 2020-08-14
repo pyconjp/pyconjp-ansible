@@ -37,6 +37,7 @@
       SLACK_TOKEN = '{{ SLACK_TOKEN }}'
     dest: "{{ APP_DIR }}/settings.py"
 
+# root crontab -l (/var/spool/cron/crontabs/root)
 - name: set python path to cron
   cron:
     name: PATH
