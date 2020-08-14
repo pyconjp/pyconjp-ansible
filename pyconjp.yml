@@ -6,4 +6,6 @@
     - { tags: w2018, role: web-2018 }
     - { tags: w2017, role: web-2017 }
     - { tags: w2016, role: web-2016 }
+    - { tags: p, role: pyenv }
+    - { tags: cron, role: pyconjp-cron }
     - { tags: n, role: nginx }

@@ -1,0 +1,35 @@
+---
+- name: clone pyenv
+  git:
+    repo: https://github.com/pyenv/pyenv.git
+    dest: /root/.pyenv
+    version: master
+
+# https://github.com/pyenv/pyenv/wiki#suggested-build-environment
+- name: reqirements for python-build
+  set_fact:
+    packages:
+      - make
+      - build-essential
+      - libssl-dev
+      - zlib1g-dev
+      - libbz2-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - wget
+      - curl
+      - llvm
+      - libncurses5-dev
+      - xz-utils
+      - tk-dev
+      - libxml2-dev
+      - libxmlsec1-dev
+      - libffi-dev
+      - liblzma-dev
+
+- name: install requirements from apt
+  apt:
+    state: present
+    install_recommends: no
+    name: "{{ packages }}"
+    update_cache: yes

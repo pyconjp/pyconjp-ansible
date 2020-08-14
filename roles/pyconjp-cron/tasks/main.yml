@@ -1,0 +1,78 @@
+---
+
+- name: using Python 3.6.11
+  set_fact:
+    PYTHON_VERSION: 3.6.11
+    APP_DIR: /var/app/pyconjp/pyconjp-cron
+
+- name: install python {{ PYTHON_VERSION }} by pyenv
+  command: /root/.pyenv/bin/pyenv install {{ PYTHON_VERSION }} --skip-existing
+
+- name: Clone pyconjs-cron from github
+  git:
+    repo: https://github.com/pyconjp/pyconjp-cron.git
+    dest: {{ APP_DIR }}
+    version: master
+    depth: 1
+
+- name: write settings.py from vault credentials file
+  copy:
+    mode: 0600
+    content: |
+      # Twitter
+      CONSUMER_KEY = '{{ CONSUMER_KEY }}'
+      CONSUMER_SECRET = '{{ CONSUMER_SECRET }}'
+      ACCESS_TOKEN = '{{ ACCESS_TOKEN }}'
+      ACCESS_TOKEN_SECRET = '{{ ACCESS_TOKEN_SECRET }}'
+
+      # Facebook
+      APP_ID = '{{ APP_ID }}'
+      APP_SECRET = '{{ APP_SECRET }}'
+      PAGE_ID = '{{ PAGE_ID }}'
+      FB_ACCESS_TOKEN = '{{ FB_ACCESS_TOKEN }}'
+      FB_PAGE_ACCESS_TOKEN = '{{ FB_PAGE_ACCESS_TOKEN }}'
+
+      # Slack API token
+      # https://api.slack.com/custom-integrations/legacy-tokens
+      SLACK_TOKEN = '{{ SLACK_TOKEN }}'
+    dest: "{{ APP_DIR }}/settings.py"
+
+- name: set python path to cron
+  cron:
+    name: PATH
+    env: yes
+    job: /root/.pyenv/shims:/usr/bin:$PATH
+
+# for test cron module
+- name: version
+  cron:
+    name: version
+    state: present
+    disabled: yes
+    job: cd {{ APP_DIR }} && PYENV_VERSION={{ PYTHON_VERSION }} python --version >> /tmp/cron.log
+
+- name: sns_notify.py
+  cron:
+    name: sns_notify.py
+    state: present
+    disabled: yes
+    job: cd {{ APP_DIR }} && PYENV_VERSION={{ PYTHON_VERSION }} python sns_notify.py
+    minute: "*/5"
+
+- name: update_calendar.py
+  cron:
+    name: update_calendar.py
+    state: present
+    disabled: yes
+    job: export LANG=en_US.utf8; cd {{ APP_DIR }} && PYENV_VERSION={{ PYTHON_VERSION }} python update_calendar.py
+    minute: "0"
+    hour: "9"
+
+- name: slack_channels_list.py
+  cron:
+    name: slack_channels_list.py
+    state: present
+    disabled: yes
+    job: cd {{ APP_DIR }} && PYENV_VERSION={{ PYTHON_VERSION }} python slack_channels_list.py
+    minute: "30"
+    hour: "9"
