@@ -1,0 +1,6 @@
+---
+- git:
+    repo: https://github.com/pyconjp/apac-2013.pycon.jp.static.git
+    dest: /var/www/pyconjp/apac-2013.pycon.jp.static
+    version: master
+    depth: 1

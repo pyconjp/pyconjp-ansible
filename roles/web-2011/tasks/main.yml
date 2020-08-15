@@ -1,0 +1,6 @@
+---
+- git:
+    repo: https://github.com/pyconjp/2011.pycon.jp.static.git
+    dest: /var/www/pyconjp/2011.pycon.jp.static
+    version: master
+    depth: 1
