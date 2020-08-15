@@ -15,6 +15,14 @@
     version: master
     depth: 1
 
+- name: pip install to venv
+  pip:
+    requirements: "{{ APP_DIR }}/requirements.txt"
+    virtualenv: "{{ APP_DIR }}/venv"
+    virtualenv_command: "/root/.pyenv/shims/python -m venv"
+  environment:
+    PYENV_VERSION: "{{ PYTHON_VERSION }}"
+
 - name: write settings.py from vault credentials file
   copy:
     mode: 0600
@@ -38,26 +46,20 @@
     dest: "{{ APP_DIR }}/settings.py"
 
 # root crontab -l (/var/spool/cron/crontabs/root)
-- name: set python path to cron
-  cron:
-    name: PATH
-    env: yes
-    job: /root/.pyenv/shims:/usr/bin:$PATH
-
 # for test cron module
 - name: version
   cron:
     name: version
     state: present
-    disabled: yes
-    job: cd {{ APP_DIR }} && PYENV_VERSION={{ PYTHON_VERSION }} python --version >> /tmp/cron.log
+    disabled: no
+    job: cd {{ APP_DIR }} && venv/bin/python --version >> /tmp/cron.log
 
 - name: sns_notify.py
   cron:
     name: sns_notify.py
     state: present
     disabled: yes
-    job: cd {{ APP_DIR }} && PYENV_VERSION={{ PYTHON_VERSION }} python sns_notify.py
+    job: cd {{ APP_DIR }} && venv/bin/python sns_notify.py
     minute: "*/5"
 
 - name: update_calendar.py
@@ -65,7 +67,7 @@
     name: update_calendar.py
     state: present
     disabled: yes
-    job: export LANG=en_US.utf8; cd {{ APP_DIR }} && PYENV_VERSION={{ PYTHON_VERSION }} python update_calendar.py
+    job: export LANG=en_US.utf8; cd {{ APP_DIR }} && venv/bin/python update_calendar.py
     minute: "0"
     hour: "9"
 
@@ -74,6 +76,6 @@
     name: slack_channels_list.py
     state: present
     disabled: yes
-    job: cd {{ APP_DIR }} && PYENV_VERSION={{ PYTHON_VERSION }} python slack_channels_list.py
+    job: cd {{ APP_DIR }} && venv/bin/python slack_channels_list.py
     minute: "30"
     hour: "9"
