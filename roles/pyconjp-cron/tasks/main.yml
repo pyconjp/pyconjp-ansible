@@ -45,6 +45,20 @@
       SLACK_TOKEN = '{{ SLACK_TOKEN }}'
     dest: "{{ APP_DIR }}/settings.py"
 
+- name: client_secret.json
+  copy:
+    mode: 0600
+    content: |
+      {{ client_secret }}
+    dest: "{{ APP_DIR }}/client_secret.json"
+
+- name: credentials.json
+  copy:
+    mode: 0600
+    content: |
+      {{ credentials }}
+    dest: "{{ APP_DIR }}/credentials.json"
+
 # root crontab -l (/var/spool/cron/crontabs/root)
 # for test cron module
 - name: version
