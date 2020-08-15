@@ -13,4 +13,5 @@
     - { tags: w2011, role: web-2011 }
     - { tags: p, role: pyenv }
     - { tags: cron, role: pyconjp-cron }
+    - { tags: jira-issue-report, role: jira-issue-report }
     - { tags: n, role: nginx }

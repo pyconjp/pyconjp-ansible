@@ -8,7 +8,7 @@
 - name: install python {{ PYTHON_VERSION }} by pyenv
   command: /root/.pyenv/bin/pyenv install {{ PYTHON_VERSION }} --skip-existing
 
-- name: Clone pyconjs-cron from github
+- name: Clone pyconjp-cron from github
   git:
     repo: https://github.com/pyconjp/pyconjp-cron.git
     dest: "{{ APP_DIR }}"
@@ -49,14 +49,14 @@
 # for test cron module
 - name: version
   cron:
-    name: version
+    name: pyconjp-cron/version
     state: present
     disabled: no
     job: cd {{ APP_DIR }} && venv/bin/python --version >> /tmp/cron.log
 
 - name: sns_notify.py
   cron:
-    name: sns_notify.py
+    name: pyconjp-cron/sns_notify.py
     state: present
     disabled: yes
     job: cd {{ APP_DIR }} && venv/bin/python sns_notify.py
@@ -64,7 +64,7 @@
 
 - name: update_calendar.py
   cron:
-    name: update_calendar.py
+    name: pyconjp-cron/update_calendar.py
     state: present
     disabled: yes
     job: export LANG=en_US.utf8; cd {{ APP_DIR }} && venv/bin/python update_calendar.py
@@ -73,7 +73,7 @@
 
 - name: slack_channels_list.py
   cron:
-    name: slack_channels_list.py
+    name: pyconjp-cron/slack_channels_list.py
     state: present
     disabled: yes
     job: cd {{ APP_DIR }} && venv/bin/python slack_channels_list.py

@@ -1,0 +1,56 @@
+---
+
+- name: using Python 3.7.7
+  set_fact:
+    PYTHON_VERSION: 3.7.7
+    APP_DIR: /var/app/pyconjp/jira-issue-report
+
+- name: install python {{ PYTHON_VERSION }} by pyenv
+  command: /root/.pyenv/bin/pyenv install {{ PYTHON_VERSION }} --skip-existing
+
+- name: Clone jira-issue-report from github
+  git:
+    repo: https://github.com/pyconjp/jira-issue-report.git
+    dest: "{{ APP_DIR }}"
+    version: master
+    depth: 1
+
+- name: pip install to venv
+  pip:
+    requirements: "{{ APP_DIR }}/requirements.txt"
+    virtualenv: "{{ APP_DIR }}/venv"
+    virtualenv_command: "/root/.pyenv/shims/python -m venv"
+  environment:
+    PYENV_VERSION: "{{ PYTHON_VERSION }}"
+
+- name: write settings.py from vault credentials file
+  copy:
+    mode: 0600
+    content: |
+      [DEFAULT]
+      # JIRA username / password
+      username = JIRA username
+      password = JIRA password
+      # Slack API token
+      token = Slack API token
+      # debug mode(True or False)
+      debug = False
+    dest: "{{ APP_DIR }}/config.ini"
+
+# root crontab -l (/var/spool/cron/crontabs/root)
+# for test cron module
+- name: version
+  cron:
+    name: jira-issue-report/version
+    state: present
+    disabled: no
+    job: cd {{ APP_DIR }} && venv/bin/python --version >> /tmp/cron.log
+
+- name: issue.py
+  cron:
+    name: jira-issue-report/issue.py
+    state: present
+    disabled: yes
+    job: cd {{ APP_DIR }} && venv/bin/python issue.py
+    minute: "40"
+    hour: "11"
