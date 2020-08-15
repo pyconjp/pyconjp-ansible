@@ -29,10 +29,10 @@
     content: |
       [DEFAULT]
       # JIRA username / password
-      username = JIRA username
-      password = JIRA password
+      username = {{ username }}
+      password = {{ password }}
       # Slack API token
-      token = Slack API token
+      token = {{ token }}
       # debug mode(True or False)
       debug = False
     dest: "{{ APP_DIR }}/config.ini"
