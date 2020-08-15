@@ -11,7 +11,7 @@
 - name: Clone pyconjs-cron from github
   git:
     repo: https://github.com/pyconjp/pyconjp-cron.git
-    dest: {{ APP_DIR }}
+    dest: "{{ APP_DIR }}"
     version: master
     depth: 1
 
