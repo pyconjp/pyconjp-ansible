@@ -27,40 +27,52 @@
   copy:
     mode: 0600
     content: |
-      # Settings for slackbot
+      ## Settings for slackbot
 
       # API Token for Bot integration
       # https://pyconjp.slack.com/services/B15KRL7CY
-      API_TOKEN = "<your-api-token>"
+      API_TOKEN = "{{ API_TOKEN }}"
 
       DEFAULT_REPLY = "コマンドが不明です。ヘルプを参照してください https://github.com/pyconjp/pyconjpbot#commands"
 
-      ERRORS_TO = 'pyconjpbot-test'
+      ERRORS_TO = 'pyconjpbot-error'
 
       PLUGINS = [
-          #'slackbot.plugins',
-          'pyconjpbot.plugins',
-          'pyconjpbot.google_plugins',
+        'pyconjpbot.plugins',
+        'pyconjpbot.google_plugins',
       ]
 
-      ALIASES = '$'
+      ALIASES = '?'
+
+      import logging
+      fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+      logging.basicConfig(format=fmt, filename='pyconjpbot.log', level=logging.DEBUG)
 
       # Settings for jira plugin
       JIRA_URL = 'https://pyconjp.atlassian.net/'
-      JIRA_PROJECTS = ['ISSHA', 'SAR', 'TRI', 'INU']  # JIRA Project Keys
-      JIRA_DEFAULT_PROJECT = 'INU'   # JIRA Default Project Key
+      JIRA_PROJECTS = ['ISSHA', 'TRI', 'INU', 'WYI', 'NEZ']  # JIRA Project Keys
+      JIRA_DEFAULT_PROJECT = 'NEZ'  # JIRA Default Project Key
 
       # see https://docs.google.com/spreadsheets/d/1YiqErBDdp5QWfTlfDmxc6Vi696b_NGFJKzuyM-v6PDM/edit#gid=0
       # https://id.atlassian.com/manage/api-tokens でトークンを生成
-      JIRA_USERNAME = '<JIRA Username>'
-      JIRA_USER = '<JIRA Email>'
-      JIRA_PASS = '<JIRA API Token>'
+      JIRA_USERNAME = 'jirabot'
+      JIRA_USER = 'contact+jirabot@pycon.jp'
+      JIRA_PASS = '{{ JIRA_PASS }}'
 
-      # Settings for translator plugin
-      # https://www.microsoft.com/ja-jp/translator/getstarted.aspx
-      TRANSLATOR_API_KEY = '<Your Subscription Key>'
+      ## Settings for translator plugin
+      # https://www.microsoft.com/en-us/translator/getstarted.aspx
+      TRANSLATOR_API_KEY = '{{ TRANSLATOR_API_KEY }}'
 
-      # Settings for github plugin
-      GITHUB_TOKEN = '<Your Github Token>'
-      GITHUB_ORGANIZATION = '<Your organization>'
+      ## Settings for github plugin
+      GITHUB_TOKEN = '{{ GITHUB_TOKEN }}'
+      GITHUB_ORGANIZATION = 'pyconjp'
     dest: "{{ APP_DIR }}/slackbot_settings.py"
+
+- name: Copy systemd files
+  copy: src=etc/systemd/system/pyconjpbot.service dest=/etc/systemd/system/pyconjpbot.service owner=root group=root mode=0644
+
+- name: enabled systemd
+  systemd: name=pyconjpbot.service state=started enabled=yes daemon_reload=yes
+
+- name: restart systemd
+  systemd: name=pyconjpbot.service state=restarted

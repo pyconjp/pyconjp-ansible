@@ -1,0 +1,17 @@
+[Unit]
+Description=pyconjpbot server
+After=network.target
+
+[Service]
+Type=simple
+PIDFile=/var/run/pyconjpbot.pid
+SyslogIdentifier=pyconjpbot
+User=root
+WorkingDirectory=/var/app/pyconjp/pyconjpbot
+EnvironmentFile=-/etc/default/pyconjpbot
+ExecStart=/var/app/pyconjp/pyconjpbot/venv/bin/python run.py
+TimeoutSec=300
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
