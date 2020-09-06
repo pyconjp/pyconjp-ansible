@@ -6,8 +6,8 @@
     - { tags: w2018, role: web-2018 }
     - { tags: w2017, role: web-2017 }
     - { tags: w2016, role: web-2016 }
-    # - { tags: w2015, role: web-2015 }
-    # - { tags: w2014, role: web-2014 }
+    - { tags: w2015, role: web-2015 }
+    - { tags: w2014, role: web-2014 }
     - { tags: w2013, role: web-2013 }
     - { tags: w2012, role: web-2012 }
     - { tags: w2011, role: web-2011 }
