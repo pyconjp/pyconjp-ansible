@@ -16,11 +16,6 @@
 # Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
 ##
 
-map $http_accept_language $lang {
-    default en;
-    ~ja ja;
-}
-
 # Default server configuration
 #
 server {
