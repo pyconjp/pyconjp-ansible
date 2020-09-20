@@ -43,14 +43,14 @@
   cron:
     name: jira-issue-report/version
     state: present
-    disabled: no
+    disabled: yes
     job: cd {{ APP_DIR }} && venv/bin/python --version >> /tmp/cron.log
 
 - name: issue.py
   cron:
     name: jira-issue-report/issue.py
     state: present
-    disabled: yes
+    disabled: no
     job: cd {{ APP_DIR }} && venv/bin/python issue.py
     minute: "40"
     hour: "11"

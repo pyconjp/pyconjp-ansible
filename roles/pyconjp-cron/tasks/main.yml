@@ -65,14 +65,14 @@
   cron:
     name: pyconjp-cron/version
     state: present
-    disabled: no
+    disabled: yes
     job: cd {{ APP_DIR }} && venv/bin/python --version >> /tmp/cron.log
 
 - name: sns_notify.py
   cron:
     name: pyconjp-cron/sns_notify.py
     state: present
-    disabled: yes
+    disabled: no
     job: cd {{ APP_DIR }} && venv/bin/python sns_notify.py
     minute: "*/5"
 
@@ -80,7 +80,7 @@
   cron:
     name: pyconjp-cron/update_calendar.py
     state: present
-    disabled: yes
+    disabled: no
     job: export LANG=en_US.utf8; cd {{ APP_DIR }} && venv/bin/python update_calendar.py
     minute: "0"
     hour: "9"
@@ -89,7 +89,7 @@
   cron:
     name: pyconjp-cron/slack_channels_list.py
     state: present
-    disabled: yes
+    disabled: no
     job: cd {{ APP_DIR }} && venv/bin/python slack_channels_list.py
     minute: "30"
     hour: "9"
