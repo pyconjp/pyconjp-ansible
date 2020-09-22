@@ -53,4 +53,5 @@
     disabled: no
     job: cd {{ APP_DIR }} && venv/bin/python issue.py
     minute: "40"
-    hour: "11"
+    hour: "2"
+    weekday: "1"

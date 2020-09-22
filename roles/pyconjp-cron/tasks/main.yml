@@ -83,7 +83,7 @@
     disabled: no
     job: export LANG=en_US.utf8; cd {{ APP_DIR }} && venv/bin/python update_calendar.py
     minute: "0"
-    hour: "9"
+    hour: "0"
 
 - name: slack_channels_list.py
   cron:
@@ -92,4 +92,4 @@
     disabled: no
     job: cd {{ APP_DIR }} && venv/bin/python slack_channels_list.py
     minute: "30"
-    hour: "9"
+    hour: "0"
