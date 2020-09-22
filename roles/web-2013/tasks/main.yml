@@ -1,6 +1,15 @@
 ---
+- set_fact:
+    repository: pyconjp/apac-2013.pycon.jp.static
+    year: 2013
+
 - git:
-    repo: https://github.com/pyconjp/apac-2013.pycon.jp.static.git
-    dest: /var/www/pyconjp/apac-2013.pycon.jp.static
+    repo: "https://github.com/{{ repository }}.git"
+    dest: "/var/app/{{ repository }}"
     version: master
     depth: 1
+
+- file:
+    state: link
+    src: "/var/app/{{ repository }}"
+    dest: "/var/www/apac-2013.pycon.jp"

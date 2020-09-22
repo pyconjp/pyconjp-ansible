@@ -51,41 +51,6 @@ server {
 		try_files $uri $uri/ =404;
 	}
 
-        location ~ ^/2016(/|)$ {
-            return 301 $scheme://$host/2016/$lang;
-        }
-        location /2016/ {
-            root /var/www/pyconjp/pycon.jp.2016/;
-        }
-
-        location ~ ^/2017(/|)$ {
-            return 301 $scheme://$host/2017/$lang;
-        }
-        location /2017/ {
-            root /var/www/pyconjp/pycon.jp.2017/;
-        }
-
-        location /2018 {
-            root /var/www/pyconjp/pycon.jp.2018/;
-        }
-
-        location /2019 {
-            root /var/www/pyconjp/pycon.jp.2019/;
-        }
-
-        # location /2020/ {
-        #     proxy_pass https://pyconjp.github.io/pycon.jp.2020.teaser/;
-        # }
-
-
-        location ~ ^/2020/(.*)$ {
-            resolver 169.254.169.253 valid=5s;
-            set $to master.d2pny5p3024uhy.amplifyapp.com;
-            proxy_pass https://$to/$1;
-            proxy_ssl_server_name   on;
-            proxy_ssl_name          $to;
-        }
-
         # location /_nuxt/ {
         #     resolver 169.254.169.253 valid=5s;
         #     set $to master.d2pny5p3024uhy.amplifyapp.com;
