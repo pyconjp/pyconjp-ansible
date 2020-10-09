@@ -1,0 +1,32 @@
+---
+- name: create user
+  user:
+    state: "{{ item.state | default('present') }}"
+    name: "{{ item.name }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    create_home: yes
+  with_items: "{{ users }}"
+
+- name: set authorized key took from github
+  authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "{{ 'https://github.com/' + item.name + '.keys' }}"
+  with_items: "{{ users }}"
+
+- name: set secondary group
+  user:
+    state: present
+    name: "{{ item.name }}"
+    groups: "{{ item.groups }}"
+    append: yes
+  with_items:
+    - "{{ users }}"
+  when: item.groups | default(false)
+
+- name: allow change own password
+  lineinfile:
+    create: yes
+    path: /etc/sudoers.d/users-passwd
+    line: "{{ item.name }} ALL=(ALL) NOPASSWD:/usr/bin/passwd {{ item.name }}"
+  with_items: "{{ users }}"

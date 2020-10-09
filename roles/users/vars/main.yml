@@ -1,0 +1,10 @@
+# 命名はgithubのユーザ名です
+# https://docs.google.com/spreadsheets/d/1oreYxQN9T9gi9hC3zRGydQXo-oNjd5Co48BJVwGIucQ/edit#gid=2119715481
+
+---
+users:
+  - { name: takanory, groups: [sudo] }
+  - { name: terapyon, groups: [sudo] }
+  - { name: shimizukawa, groups: [sudo] }
+  - { name: koedoyoshida, groups: [sudo] }
+  - { name: rmanzoku, groups: [sudo] }
