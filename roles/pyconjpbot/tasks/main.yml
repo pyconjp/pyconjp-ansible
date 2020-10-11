@@ -42,7 +42,7 @@
         'pyconjpbot.google_plugins',
       ]
 
-      ALIASES = '?'
+      ALIASES = '$'
 
       import logging
       fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
