@@ -1,8 +1,8 @@
 ---
 
-- name: using Python 3.7.7
+- name: using Python 3.8.6
   set_fact:
-    PYTHON_VERSION: 3.7.7
+    PYTHON_VERSION: 3.8.6
     APP_DIR: /var/app/pyconjp/jira-issue-report
 
 - name: install python {{ PYTHON_VERSION }} by pyenv
