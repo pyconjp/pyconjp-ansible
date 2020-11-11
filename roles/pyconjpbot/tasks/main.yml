@@ -68,6 +68,13 @@
       GITHUB_ORGANIZATION = 'pyconjp'
     dest: "{{ APP_DIR }}/slackbot_settings.py"
 
+- name: write credentials.json from vault credentials file
+  copy:
+    mode: 0600
+    content: |
+      {{ GOOGLE_CREDENTIALS }}
+    dest: "{{ APP_DIR }}/pyconjpbot/google_plugins/credentials.json"
+
 - name: Copy systemd files
   copy: src=etc/systemd/system/pyconjpbot.service dest=/etc/systemd/system/pyconjpbot.service owner=root group=root mode=0644
 
