@@ -18,3 +18,4 @@
     - { tags: jira-issue-report, role: jira-issue-report }
     - { tags: bot, role: pyconjpbot }
     - { tags: n, role: nginx }
+    - { tags: infra, role: infra }

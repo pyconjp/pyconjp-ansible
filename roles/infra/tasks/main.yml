@@ -1,0 +1,36 @@
+---
+- name: set arch to amd64
+  set_fact:
+    arch: "amd64"
+  when: ansible_architecture == "x86_64"
+
+- name: set arch to arm64
+  set_fact:
+    arch: "arm64"
+  when: ansible_architecture == "aarch64"
+
+- set_fact:
+    from_url:
+      - url: "https://github.com/rmanzoku/mackerel-plugin-aws-billing-per-account/releases/download/v0.0.2/mackerel-plugin-aws-billing-per-account_0.0.2_linux_{{ arch }}.tar.gz"
+        src: mackerel-plugin-aws-billing-per-account
+        bin: mackerel-plugin-aws-billing-per-account
+      - url: "https://github.com/catatsuy/notify_slack/releases/download/v0.4.7/notify_slack-linux-{{ arch }}.tar.gz"
+        src: notify_slack
+        bin: notify_slack
+      - url: "https://github.com/rmanzoku/mkrh/releases/download/v0.0.3/mkrh_0.0.3_linux_{{ arch }}.tar.gz"
+        src: mkrh
+        bin: mkrh
+
+- unarchive: src={{ item.url }} dest="/opt/" remote_src=yes
+  when: (item.archived is undefined) or (item.archived)
+  with_items: "{{ from_url }}"
+
+# - file: state=link src="{{ lookup('env','HOME') }}/usr/local/{{ item.src }}" dest="{{ lookup('env','HOME') }}/usr/local/bin/{{ item.bin }}"
+#   when: (item.archived is undefined) or (item.archived)
+#   with_items: "{{ from_url }}"
+
+# - get_url: url={{ item.url }} dest="{{ lookup('env','HOME') }}/usr/local/bin/{{ item.bin }}" mode=0755
+#   when: (item.archived is defined) and (not item.archived)
+#   with_items: "{{ from_url }}"
+
+
