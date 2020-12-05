@@ -6,7 +6,7 @@
 - git:
     repo: "https://github.com/{{ repository }}.git"
     dest: "/var/app/{{ repository }}"
-    version: master
+    version: develop
     depth: 1
 
 - file:
