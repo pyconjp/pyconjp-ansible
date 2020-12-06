@@ -28,3 +28,27 @@ PWの変更をする場合は以下のコマンドで変更できます。
 ```
 $ sudo passwd GITHUB_USERNAME
 ```
+
+## Ansibleの実行
+事前に上記ユーザーを作成を依頼し、担当者からansible-vault用のパスワードを教えてもらってください。
+
+### 環境の構築
+各自の任意の方法でPythonの実行環境を作成してください。
+推奨するPythonのバージョンは`.python-version`に書いてありますが、ansibleが実行できれば問題ありません。
+
+ansibleを含むライブラリをインストールします。
+
+```
+$ cd pyconjp-ansible
+$ pip install -r requirements.txt
+```
+
+vaultのパスワードを隠しファイルに入力します。
+```
+$ echo $VAULT_PASS > .vault_password_file
+```
+
+ansible-playbookを実行してサーバへ設定を反映させることができるようになります。
+```
+$ ansible-playbook pyconjp.yml
+```
