@@ -32,7 +32,7 @@ $ sudo passwd GITHUB_USERNAME
 ## Ansibleの実行
 事前に上記ユーザーを作成を依頼し、担当者からansible-vault用のパスワードを教えてもらってください。
 
-### 環境の構築
+### 再構築手順
 各自の任意の方法でPythonの実行環境を作成してください。
 推奨するPythonのバージョンは`.python-version`に書いてありますが、ansibleが実行できれば問題ありません。
 
@@ -52,5 +52,53 @@ ansible-playbookを実行してサーバへ設定を反映させることがで�
 root権限を必要とするため、サーバアカウントのパスワードの入力が求められます。上記サーバログイン時に変更したパスワードを入力してください。
 ```
 $ ansible-playbook pyconjp.yml
+BECOME password
+```
+
+## Webサイトの更新
+現在配信しているページは全て静的サイトになっているため、サーバ上の所定のパスへ`git pull`するだけで更新可能です。
+詳しくは`roles/web-%Y`をみてください。
+
+ansible経由でmaster branchの更新が可能です。
+
+```
+# 2020は開催年を指定してください
+$ ansible-playbook pyconjp.yml -t web2020
+BECOME password
+```
+
+## pyconjpbotの更新
+[pyconjpbot](https://github.com/pyconjp/pyconjpbot)
+設定値等は`roles/pyconjpbot/tasks | vars`で管理されています。
+
+ansible経由でmaster branchの更新が可能です。
+pip及びソースコードの更新が実行されます。
+
+```
+$ ansible-playbook pyconjp.yml -t bot
+BECOME password
+```
+
+## pyconjp-cronの更新
+[pyconjp-cron](https://github.com/pyconjp/pyconjp-cron)
+設定値及びCronの設定は`roles/pyconjp-cron/tasks | vars`で管理されています。
+
+ansible経由でmaster branchの更新が可能です。
+pip及びソースコードの更新が実行されます。
+
+```
+$ ansible-playbook pyconjp.yml -t cron
+BECOME password
+```
+
+## jira-issue-reportの更新
+[jira-issue-report](https://github.com/pyconjp/jira-issue-report)
+設定値及びCronの設定は`roles/jira-issue-report/tasks | vars`で管理されています。
+
+ansible経由でmaster branchの更新が可能です。
+pip及びソースコードの更新が実行されます。
+
+```
+$ ansible-playbook pyconjp.yml -t jira-issue-report
 BECOME password
 ```
