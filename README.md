@@ -49,10 +49,9 @@ $ echo $VAULT_PASS > .vault_password_file
 ```
 
 ansible-playbookを実行してサーバへ設定を反映させることができるようになります。
-root権限を必要とするため、サーバアカウントのパスワードの入力が求められます。上記サーバログイン時に変更したパスワードを入力してください。
+上記サーバログイン時に変更したパスワードを入力してください。
 ```
 $ ansible-playbook pyconjp.yml
-BECOME password
 ```
 
 ## Webサイトの更新
