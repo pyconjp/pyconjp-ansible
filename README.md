@@ -57,7 +57,7 @@ $ . env/bin/activate
 (env) $ pip install -r requirements.txt
 ```
 
-* vaultのパスワーecho ドを隠しファイルに入力します。
+* vaultのパスワードを隠しファイルに入力します。
 
 ```bash
 (env) $ echo $VAULT_PASS > .vault_password_file
