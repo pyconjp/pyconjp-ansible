@@ -4,7 +4,7 @@
 
 * pycon.jp のサーバー構成を管理するためのansibleのリポジトリです
 * pycon.jp のサーバーはAWS EC2上で動作しており、主に以下のサービスが動いています
-  * 過去のPyCon JPイベントのWebサイトとnginx
+  * 過去のPyCon JPイベントのWebサイト（静的ファイル）とnginx
   * pyconjpbot(PyCon JP Slack上のbot)
   * jira-issue-report(JIRAの期限切れチケットを毎週通知するプログラム)
   * pyconjp-cron(PyCon JP用のさまざまな定期実行するプログラム群)
