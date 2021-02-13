@@ -19,3 +19,4 @@
     - { tags: bot, role: pyconjpbot }
     - { tags: n, role: nginx }
     - { tags: infra, role: infra }
+    - { tags: cron-apt, role: cron-apt }
