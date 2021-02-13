@@ -15,11 +15,22 @@
     version: master
     depth: 1
 
+- name: make venv
+  command: "/root/.pyenv/shims/python -m venv {{ APP_DIR }}/venv"
+  args:
+    creates: "{{ APP_DIR }}/venv"
+
+- name: update pip
+  pip:
+    name: "pip==21.0.1"
+    virtualenv: "{{ APP_DIR }}/venv"
+  environment:
+    PYENV_VERSION: "{{ PYTHON_VERSION }}"
+
 - name: pip install to venv
   pip:
     requirements: "{{ APP_DIR }}/requirements.txt"
     virtualenv: "{{ APP_DIR }}/venv"
-    virtualenv_command: "/root/.pyenv/shims/python -m venv"
   environment:
     PYENV_VERSION: "{{ PYTHON_VERSION }}"
 
