@@ -61,8 +61,8 @@
 
       # Settings for jira plugin
       JIRA_URL = 'https://pyconjp.atlassian.net/'
-      JIRA_PROJECTS = ['ISSHA', 'TRI', 'INU', 'WYI', 'NEZ']  # JIRA Project Keys
-      JIRA_DEFAULT_PROJECT = 'NEZ'  # JIRA Default Project Key
+      JIRA_PROJECTS = ['ISSHA', 'WYI', 'NEZ']  # JIRA Project Keys
+      JIRA_DEFAULT_PROJECT = 'ISSHA'  # JIRA Default Project Key
 
       # see https://docs.google.com/spreadsheets/d/1YiqErBDdp5QWfTlfDmxc6Vi696b_NGFJKzuyM-v6PDM/edit#gid=0
       # https://id.atlassian.com/manage/api-tokens でトークンを生成
