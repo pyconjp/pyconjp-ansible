@@ -45,12 +45,12 @@
       SLACK_TOKEN = '{{ SLACK_TOKEN }}'
     dest: "{{ APP_DIR }}/settings.py"
 
-- name: client_secret.json
+- name: token.json
   copy:
     mode: 0600
     content: |
-      {{ client_secret }}
-    dest: "{{ APP_DIR }}/client_secret.json"
+      {{ token }}
+    dest: "{{ APP_DIR }}/token.json"
 
 - name: credentials.json
   copy:
