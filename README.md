@@ -77,7 +77,7 @@ $ . env/bin/activate
 
 ```
 # `web2020` の部分は開催年を指定してください
-(env) $ ansible-playbook pyconjp.yml -t web2020
+(env) $ ansible-playbook pyconjp.yml -t w2020
 ```
 
 ## pyconjpbotの更新
