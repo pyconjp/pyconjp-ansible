@@ -76,8 +76,10 @@ $ . env/bin/activate
 * ansible経由でmaster branchの更新が可能です。
 
 ```
-# `web2020` の部分は開催年を指定してください
+# `w2020` の部分は開催年を指定してください
 (env) $ ansible-playbook pyconjp.yml -t w2020
+
+キャッシュされているので、すぐ更新したい場合はCloudFrontのInvalidation(キャッシュ削除)で /2020/* 等で消します
 ```
 
 ## pyconjpbotの更新
