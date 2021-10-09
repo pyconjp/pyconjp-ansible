@@ -71,16 +71,16 @@ $ . env/bin/activate
 
 ## Webサイトの更新
 
-* 現在配信しているページは全て静的サイトになっているため、サーバ上の所定のパスへ`git pull`するだけで更新可能です。
+* 現在配信しているページは全て静的サイトになっているため、サーバ上の所定のパスへ`git pull`する(そしてCloudFront反映)で更新可能です。
 * 詳しくは`roles/web-2020/tasks`等を参照しください。
 * ansible経由でmaster branchの更新が可能です。
 
 ```
 # `w2020` の部分は開催年を指定してください
 (env) $ ansible-playbook pyconjp.yml -t w2020
-
-キャッシュされているので、すぐ更新したい場合はCloudFrontのInvalidation(キャッシュ削除)で /2020/* 等で消します
 ```
+
+その後、キャッシュされているので、すぐ更新したい場合はCloudFrontのInvalidation(キャッシュ削除)で /2020/* 等で消します
 
 ## pyconjpbotの更新
 
