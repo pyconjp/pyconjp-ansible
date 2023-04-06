@@ -1,0 +1,15 @@
+---
+- set_fact:
+    repository: pyconjp/pycon.jp.2022
+    year: 2022
+
+- git:
+    repo: "https://github.com/{{ repository }}.git"
+    dest: "/var/app/{{ repository }}"
+    version: main
+    depth: 1
+
+- file:
+    state: link
+    src: "/var/app/{{ repository }}/2022"
+    dest: "/var/www/pyconjp/2022.pycon.jp"
