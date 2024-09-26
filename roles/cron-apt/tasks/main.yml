@@ -1,0 +1,15 @@
+---
+- name: install cron-apt
+  apt:
+    name: cron-apt
+
+- name: update configuration file
+  copy:
+    content: |
+      autoclean -y
+      #auto update
+      dist-upgrade -y -o APT::Get::Show-Upgraded=true
+    dest: /etc/cron-apt/action.d/3-download
+    owner: root
+    group: root
+    mode: 0644
