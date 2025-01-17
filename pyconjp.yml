@@ -3,6 +3,8 @@
   roles:
     - base
     - { tags: u, role: users }
+    - { tags: w2023, role: web-2023 }
+    - { tags: w2022, role: web-2022 }
     - { tags: w2021, role: web-2021 }
     - { tags: w2020, role: web-2020 }
     - { tags: w2019, role: web-2019 }
