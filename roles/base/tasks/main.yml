@@ -4,9 +4,19 @@
     packages:
       - rsync
       - git
+      - nginx
+      - cron
 
 - name: install base packages from apt
   apt:
     state: present
     name: "{{ packages }}"
     update_cache: yes
+
+- name: test directory created
+  file:
+    path: "/var/www/pyconjp/"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: "755"
