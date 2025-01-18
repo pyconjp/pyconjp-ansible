@@ -11,6 +11,7 @@
   authorized_key:
     user: "{{ item.name }}"
     state: present
+    validate_certs: false
     key: "{{ 'https://github.com/' + item.name + '.keys' }}"
   with_items: "{{ users }}"
 
