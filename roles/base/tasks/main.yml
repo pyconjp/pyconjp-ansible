@@ -6,6 +6,7 @@
       - git
       - nginx
       - cron
+      - rsyslog
 
 - name: install base packages from apt
   apt:
