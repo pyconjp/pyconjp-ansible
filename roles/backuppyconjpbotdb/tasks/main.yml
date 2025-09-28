@@ -1,0 +1,7 @@
+---
+
+- name: backup botdb
+  fetch:
+    src:  /var/app/pyconjp/pyconjpbot/pyconjpbot/plugins/plusplus.db
+    dest: /tmp/pyconjp/pyconjpbot/plusplus.db
+    flat: yes

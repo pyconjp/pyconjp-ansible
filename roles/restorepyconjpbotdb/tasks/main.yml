@@ -1,0 +1,6 @@
+---
+
+- name: restore botdb
+  copy:
+    src:  /tmp/pyconjp/pyconjpbot/plusplus.db
+    dest: /var/app/pyconjp/pyconjpbot/pyconjpbot/plugins/plusplus.db

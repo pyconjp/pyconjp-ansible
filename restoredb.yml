@@ -1,0 +1,4 @@
+---
+- hosts: pyconjp
+  roles:
+    - { tags: restore, role: restorepyconjpbotdb }
