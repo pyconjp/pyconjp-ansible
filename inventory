@@ -1,2 +1,2 @@
 [pyconjp]
-18.182.25.210
+18.182.25.210 ansible_python_interpreter=/usr/local/bin/python3.9
