@@ -43,6 +43,9 @@
       # Slack API token
       # https://api.slack.com/custom-integrations/legacy-tokens
       SLACK_TOKEN = '{{ SLACK_TOKEN }}'
+
+      # Connpass API Key
+      CONNPASS_API_KEY = '{{ CONNPASS_API_KEY }}'
     dest: "{{ APP_DIR }}/settings.py"
 
 - name: token.json
