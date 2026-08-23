@@ -1,0 +1,14 @@
+---
+- set_fact:
+    repository: pyconjp/collected-pieces-2025
+
+- git:
+    repo: "https://github.com/{{ repository }}.git"
+    dest: "/var/app/{{ repository }}"
+    version: dist
+    depth: 1
+
+- file:
+    state: link
+    src: "/var/app/{{ repository }}/dist"
+    dest: "/var/www/pyconjp/pieces.2025.pycon.jp"
